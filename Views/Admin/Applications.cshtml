@@ -1,0 +1,96 @@
+﻿@model IEnumerable<JobPortalSystem.Models.Application>
+
+@{
+    ViewData["Title"] = "Manage Applications";
+}
+
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold">
+            Manage Applications
+        </h2>
+
+        <a asp-action="Dashboard"
+           class="btn btn-secondary">
+            Dashboard
+        </a>
+
+    </div>
+
+    <div class="card shadow border-0">
+
+        <div class="card-body p-0">
+
+            <table class="table table-hover mb-0">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Applicant</th>
+                        <th>Job</th>
+                        <th>Company</th>
+                        <th>Applied</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var application in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @application.JobSeeker?.FullName
+                            </td>
+
+                            <td>
+                                @application.Job?.Title
+                            </td>
+
+                            <td>
+                                @application.Job?.CompanyName
+                            </td>
+
+                            <td>
+                                @application.AppliedDate.ToString("dd MMM yyyy")
+                            </td>
+
+                            <td>
+
+                                @if (application.Status == "Accepted")
+                                {
+                                    <span class="badge bg-success">
+                                        Accepted
+                                    </span>
+                                }
+                                else if (application.Status == "Rejected")
+                                {
+                                    <span class="badge bg-danger">
+                                        Rejected
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">
+                                        Pending
+                                    </span>
+                                }
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

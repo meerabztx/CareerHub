@@ -1,0 +1,39 @@
+﻿@model IEnumerable<JobPortalSystem.Models.Notification>
+
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<div class="container py-4">
+
+    <h2 class="fw-bold mb-4">
+        Notifications
+    </h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No notifications yet.
+        </div>
+    }
+
+    @foreach (var item in Model)
+    {
+        <div class="card shadow-sm mb-3">
+
+            <div class="card-body">
+
+                <h5>@item.Title</h5>
+
+                <p>@item.Message</p>
+
+                <small class="text-muted">
+                    @item.CreatedAt.ToString("dd MMM yyyy hh:mm tt")
+                </small>
+
+            </div>
+
+        </div>
+    }
+
+</div>

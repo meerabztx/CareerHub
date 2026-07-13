@@ -1,0 +1,98 @@
+@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-5">
+
+            <div class="card shadow border-0 rounded-3">
+
+                <div class="card-body p-4">
+
+                    <h2 class="text-center text-primary mb-2">
+                        Welcome Back
+                    </h2>
+
+                    <p class="text-center text-muted mb-4">
+                        Login to Job Portal System
+                    </p>
+
+                    <form id="account" method="post">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+                        <!-- Email -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email"
+                                   class="form-control"
+                                   autocomplete="username"
+                                   placeholder="Enter email" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password"
+                                   class="form-control"
+                                   autocomplete="current-password"
+                                   placeholder="Enter password" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                        <!-- Remember Me -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            <label class="form-check-label">
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+
+                        <!-- Login Button -->
+                        <button id="login-submit" type="submit" class="btn btn-primary w-100">
+                            Login
+                        </button>
+
+                    </form>
+
+                    <hr />
+
+                    <!-- Links -->
+                    <div class="text-center">
+
+                        <p class="mb-1">
+                            <a asp-page="./ForgotPassword">Forgot password?</a>
+                        </p>
+
+                        <p class="mb-1">
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">
+                                Create new account
+                            </a>
+                        </p>
+
+                        <p class="text-muted small">
+                            No email confirmation required
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

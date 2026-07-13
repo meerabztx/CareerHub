@@ -1,0 +1,49 @@
+﻿@model IEnumerable<JobPortalSystem.Models.Application>
+
+@{
+    ViewData["Title"] = "My Applications";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">My Applications</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            You haven't applied to any jobs yet.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Applied Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            @foreach (var app in Model)
+            {
+                <tr>
+                    <td>@app.Job.Title</td>
+                    <td>@app.Job.CompanyName</td>
+                    <td>@app.AppliedDate.ToShortDateString()</td>
+                    <td>
+                        <span class="badge bg-warning">
+                            @app.Status
+                        </span>
+                    </td>
+                </tr>
+            }
+            </tbody>
+
+        </table>
+    }
+
+</div>

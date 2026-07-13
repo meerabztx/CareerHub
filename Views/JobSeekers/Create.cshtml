@@ -1,0 +1,88 @@
+@model JobPortalSystem.Models.JobSeeker
+
+@{
+    ViewData["Title"] = "Create Profile";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-primary text-white">
+            <h3>Create Job Seeker Profile</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Create" enctype="multipart/form-data">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="FullName" class="form-label"></label>
+                    <input asp-for="FullName" class="form-control" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PhoneNumber" class="form-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Skills" class="form-label"></label>
+                    <textarea asp-for="Skills" rows="4" class="form-control"></textarea>
+                    <span asp-validation-for="Skills" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Experience" class="form-label"></label>
+                    <input asp-for="Experience" class="form-control" />
+                    <span asp-validation-for="Experience" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Education" class="form-label"></label>
+                    <input asp-for="Education" class="form-control" />
+                    <span asp-validation-for="Education" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Upload Resume
+                    </label>
+
+                    <input type="file"
+                           name="resumeFile"
+                           class="form-control"
+                           accept=".pdf,.doc,.docx" />
+
+                    <small class="text-muted">
+                        Accepted formats: PDF, DOC, DOCX
+                    </small>
+
+                </div>
+
+                <button class="btn btn-primary">
+                    Create Profile
+                </button>
+
+                <a asp-controller="Jobs"
+                   asp-action="Index"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

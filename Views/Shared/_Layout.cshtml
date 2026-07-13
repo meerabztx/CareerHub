@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Career Hub</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+          href="~/css/custom.css"
+          asp-append-version="true" />
+    <link rel="stylesheet" href="~/JobPortalSystem.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+
+            <!-- Brand -->
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-briefcase-fill"></i> Career Hub 
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+                <!-- NAV LINKS -->
+                    <ul class="navbar-nav me-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+                        <a asp-controller="Notifications"
+                           asp-action="Index"
+                           class="nav-link">
+                            <i class="bi bi-bell-fill"></i>
+                            Notifications
+                        </a>
+
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("JobSeeker"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Jobs" asp-action="Index">
+                                        Browse Jobs
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       asp-controller="JobSeekers"
+                                       asp-action="MyApplications">
+                                        My Applications
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="JobSeekers" asp-action="EditProfile">
+                                        My Profile
+                                    </a>
+                                </li>
+                            }
+
+                            @if (User.IsInRole("Employer"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Employer" asp-action="Dashboard">
+                                        Dashboard
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Employer" asp-action="MyJobs">
+                                        My Jobs
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Employer" asp-action="CreateJob">
+                                        Post Job
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Employer" asp-action="CompanyProfile">
+                                        Company Profile
+                                    </a>
+                                </li>
+                            }
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Admin" asp-action="Dashboard">
+                                        Admin Dashboard
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       asp-controller="Admin"
+                                       asp-action="Dashboard">
+                                        Admin Dashboard
+                                    </a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+
+                <!-- LOGIN PARTIAL -->
+                <partial name="_LoginPartial" />
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+    <main role="main" class="container pb-5" style="min-height:80vh;">
+        @RenderBody()
+    </main>
+
+<!-- FOOTER -->
+    <footer class="footer py-3 mt-5 border-top">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <span class="text-muted">
+                © 2026 Career Hub
+            </span>
+
+            <span class="text-muted">
+                Developed by UMT Software Engineering Students
+            </span>
+
+        </div>
+    </footer>
+
+<!-- SCRIPTS -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

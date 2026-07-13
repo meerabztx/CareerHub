@@ -1,0 +1,85 @@
+@model IEnumerable<JobPortalSystem.Models.Application>
+
+@{
+    ViewData["Title"] = "My Applications";
+}
+
+<div class="container mt-4">
+
+    <h1 class="mb-4 text-primary">My Applications</h1>
+
+    <table class="table table-striped table-bordered shadow-sm">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Applied Date</th>
+                <th>Status</th>
+                <th>Job Seeker ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Job?.Title
+                </td>
+
+                <td>
+                    @item.Job?.CompanyName
+                </td>
+
+                <td>
+                    @item.AppliedDate.ToString("dd/MM/yyyy")
+                </td>
+
+                <td>
+                    @if (item.Status == "Pending")
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    }
+                    else if (item.Status == "Accepted")
+                    {
+                        <span class="badge bg-success">Accepted</span>
+                    }
+                    else if (item.Status == "Rejected")
+                    {
+                        <span class="badge bg-danger">Rejected</span>
+                    }
+                </td>
+
+                <td>
+                    @item.JobSeekerId
+                </td>
+
+                <td>
+                    <a asp-action="Details"
+                       asp-route-id="@item.ApplicationId"
+                       class="btn btn-info btn-sm">
+                        Details
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.ApplicationId"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No applications found.
+        </div>
+    }
+
+</div>

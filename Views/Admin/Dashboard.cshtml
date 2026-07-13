@@ -1,0 +1,256 @@
+﻿@model JobPortalSystem.ViewModels.AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container py-4">
+
+    <div class="mb-4">
+        <h2 class="fw-bold">Admin Dashboard</h2>
+        <p class="text-muted">
+            Welcome to Career Hub Administration Panel.
+        </p>
+    </div>
+
+    <!-- Statistics Cards -->
+
+    <div class="row g-4">
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card shadow border-0 text-center p-4">
+                <h1 class="text-primary">@Model.TotalUsers</h1>
+                <h5>Total Users</h5>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card shadow border-0 text-center p-4">
+                <h1 class="text-success">@Model.TotalEmployers</h1>
+                <h5>Employers</h5>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card shadow border-0 text-center p-4">
+                <h1 class="text-warning">@Model.TotalJobSeekers</h1>
+                <h5>Job Seekers</h5>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card shadow border-0 text-center p-4">
+                <h1 class="text-danger">@Model.TotalJobs</h1>
+                <h5>Total Jobs</h5>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="card shadow border-0 text-center p-4">
+                <h1 class="text-info">@Model.TotalApplications</h1>
+                <h5>Total Applications</h5>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Charts -->
+
+    <div class="row mt-5">
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-primary text-white">
+                    Jobs Overview
+                </div>
+
+                <div class="card-body">
+                    <canvas id="jobsChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-success text-white">
+                    Applications Overview
+                </div>
+
+                <div class="card-body">
+                    <canvas id="applicationChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Quick Actions + Recent Jobs -->
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-dark text-white">
+                    Quick Actions
+                </div>
+
+                <div class="card-body d-grid gap-2">
+
+                    <a asp-action="Users"
+                       class="btn btn-primary">
+                        Manage Users
+                    </a>
+
+                    <a asp-action="Employers"
+                       class="btn btn-success">
+                        Manage Employers
+                    </a>
+
+                    <a asp-action="JobSeekers"
+                       class="btn btn-warning">
+                        Manage Job Seekers
+                    </a>
+
+                    <a asp-action="Jobs"
+                       class="btn btn-info text-white">
+                        Manage Jobs
+                    </a>
+
+                    <a asp-action="Applications"
+                       class="btn btn-danger">
+                        Applications
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-primary text-white">
+                    Recently Posted Jobs
+                </div>
+
+                <div class="card-body">
+
+                    @if (!Model.RecentJobs.Any())
+                    {
+                        <div class="alert alert-info">
+                            No jobs posted yet.
+                        </div>
+                    }
+                    else
+                    {
+                        <table class="table table-hover">
+
+                            <thead class="table-light">
+
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Company</th>
+                                    <th>Location</th>
+                                    <th>Date</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var job in Model.RecentJobs)
+                                {
+                                    <tr>
+
+                                        <td>@job.Title</td>
+
+                                        <td>@job.CompanyName</td>
+
+                                        <td>@job.Location</td>
+
+                                        <td>@job.PostedDate.ToShortDateString()</td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        const jobsChart = new Chart(document.getElementById('jobsChart'), {
+
+        type: 'bar',
+
+        data: {
+
+        labels: ['Approved','Pending','Rejected'],
+
+        datasets: [{
+
+        label: 'Jobs',
+
+        data: [
+        @Model.ApprovedJobs,
+        @Model.PendingJobs,
+        @Model.RejectedJobs
+        ]
+
+        }]
+
+        }
+
+        });
+
+        const applicationChart = new Chart(document.getElementById('applicationChart'), {
+
+        type: 'doughnut',
+
+        data: {
+
+        labels: ['Applications','Jobs'],
+
+        datasets: [{
+
+        data: [
+        @Model.TotalApplications,
+        @Model.TotalJobs
+        ]
+
+        }]
+
+        }
+
+        });
+
+    </script>
+
+}

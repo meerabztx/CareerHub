@@ -1,0 +1,171 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="hero-section">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <span class="badge bg-primary mb-3 px-3 py-2">
+                    #1 Career Platform
+                </span>
+
+                <h1 class="display-4 fw-bold">
+                    Find Your <span class="text-primary">Dream Career</span>
+                </h1>
+
+                <p class="lead text-muted mt-4">
+                    Discover thousands of job opportunities from trusted companies.
+                    Build your career with Career Hub.
+                </p>
+
+                <div class="mt-4">
+
+                    <a asp-controller="Jobs"
+                       asp-action="Index"
+                       class="btn btn-primary btn-lg me-2">
+                        Browse Jobs
+                    </a>
+
+                    <a asp-area="Identity"
+                       asp-page="/Account/Register"
+                       class="btn btn-outline-primary btn-lg">
+                        Get Started
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 text-center">
+
+                <img asp-append-version="true"
+                     src="~/images/hero.svg"
+                     class="img-fluid hero-image"
+                     alt="Career Hub" />
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <div class="stat-card">
+
+                    <h2>1000+</h2>
+
+                    <p>Available Jobs</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="stat-card">
+
+                    <h2>500+</h2>
+
+                    <p>Companies</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="stat-card">
+
+                    <h2>10K+</h2>
+
+                    <p>Job Seekers</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            Why Choose Career Hub?
+        </h2>
+
+        <p class="text-muted">
+            Everything you need to find the perfect opportunity.
+        </p>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="feature-card">
+
+                <i class="bi bi-search"></i>
+
+                <h4>Smart Search</h4>
+
+                <p>
+                    Easily search jobs using keywords, skills and location.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="feature-card">
+
+                <i class="bi bi-building"></i>
+
+                <h4>Trusted Companies</h4>
+
+                <p>
+                    Apply confidently to verified employers.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="feature-card">
+
+                <i class="bi bi-file-earmark-check"></i>
+
+                <h4>Easy Apply</h4>
+
+                <p>
+                    Apply with your profile and track every application.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,78 @@
+@model JobPortalSystem.Models.JobSeeker
+
+@{
+    ViewData["Title"] = "Profile Details";
+}
+
+<h1>Profile Details</h1>
+
+<div>
+    <h4>Job Seeker Profile</h4>
+    <hr />
+
+    <dl class="row">
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Skills)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Skills)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Experience)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Education)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Education)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ResumePath)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ResumePath)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit"
+       asp-route-id="@Model?.JobSeekerId"
+       class="btn btn-warning">
+        Edit
+    </a>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Back to List
+    </a>
+</div>

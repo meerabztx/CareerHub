@@ -1,0 +1,40 @@
+﻿@model IEnumerable<JobPortalSystem.Data.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<div class="container py-4">
+
+    <h2 class="mb-4">Manage Users</h2>
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Username</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        @foreach(var user in Model)
+        {
+            <tr>
+
+                <td>@user.FullName</td>
+
+                <td>@user.Email</td>
+
+                <td>@user.UserName</td>
+
+            </tr>
+        }
+
+        </tbody>
+
+    </table>
+
+</div>

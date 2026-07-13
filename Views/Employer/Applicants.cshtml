@@ -1,0 +1,167 @@
+﻿@model IEnumerable<JobPortalSystem.Models.Application>
+
+@{
+    ViewData["Title"] = "Applicants";
+}
+
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold">
+                Applicants
+            </h2>
+
+            <p class="text-muted">
+                @ViewBag.JobTitle
+            </p>
+        </div>
+
+        <a asp-action="MyJobs"
+           class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back to My Jobs
+        </a>
+
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info shadow-sm">
+
+            <h5>No applications received yet.</h5>
+
+            <p class="mb-0">
+                Applicants will appear here after they apply.
+            </p>
+
+        </div>
+    }
+    else
+    {
+        @foreach (var application in Model)
+        {
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-8">
+
+                            <h4 class="fw-bold">
+                                @application.JobSeeker?.FullName
+                            </h4>
+
+                            <p class="mb-2">
+                                <strong>Education:</strong>
+                                @application.JobSeeker?.Education
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Experience:</strong>
+                                @application.JobSeeker?.Experience
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Skills:</strong>
+                                @application.JobSeeker?.Skills
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Phone:</strong>
+                                @application.JobSeeker?.PhoneNumber
+                            </p>
+
+                            @if (!string.IsNullOrWhiteSpace(application.CoverLetter))
+                            {
+                                <div class="mt-3">
+
+                                    <strong>Cover Letter</strong>
+
+                                    <div class="border rounded p-3 mt-2 bg-light">
+                                        @application.CoverLetter
+                                    </div>
+
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrEmpty(application.JobSeeker?.ResumePath))
+                            {
+                                <div class="mt-3">
+
+                                    <a href="@application.JobSeeker.ResumePath"
+                                       target="_blank"
+                                       class="btn btn-outline-primary">
+
+                                        <i class="bi bi-file-earmark-arrow-down"></i>
+
+                                        Download Resume
+
+                                    </a>
+
+                                </div>
+                            }
+
+                        </div>
+
+                        <div class="col-md-4 text-end">
+
+                            @if (application.Status == "Pending")
+                            {
+                                <span class="badge bg-warning text-dark fs-6">
+                                    Pending
+                                </span>
+                            }
+                            else if (application.Status == "Accepted")
+                            {
+                                <span class="badge bg-success fs-6">
+                                    Accepted
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger fs-6">
+                                    Rejected
+                                </span>
+                            }
+
+                            <div class="mt-4">
+
+                                @if (application.Status == "Pending")
+                                {
+                                    <a asp-action="AcceptApplicant"
+                                       asp-route-id="@application.ApplicationId"
+                                       class="btn btn-success w-100 mb-2">
+
+                                        <i class="bi bi-check-circle"></i>
+
+                                        Accept
+
+                                    </a>
+
+                                    <a asp-action="RejectApplicant"
+                                       asp-route-id="@application.ApplicationId"
+                                       class="btn btn-danger w-100">
+
+                                        <i class="bi bi-x-circle"></i>
+
+                                        Reject
+
+                                    </a>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    }
+
+</div>

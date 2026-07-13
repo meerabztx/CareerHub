@@ -1,0 +1,152 @@
+﻿@model JobPortalSystem.Models.EmployerProfile
+
+@{
+    ViewData["Title"] = "Company Profile";
+}
+
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-1">
+                Company Profile
+            </h2>
+
+            <p class="text-muted mb-0">
+                Keep your company information up to date so job seekers can learn more about your organization.
+            </p>
+        </div>
+
+        <a asp-action="Dashboard"
+           class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back to Dashboard
+        </a>
+
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            <i class="bi bi-check-circle-fill"></i>
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-circle-fill"></i>
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4 class="mb-0">
+                Company Information
+            </h4>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            <form asp-action="CompanyProfile" method="post">
+                <input asp-for="EmployerProfileId" type="hidden" />
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label asp-for="CompanyName" class="form-label fw-semibold"></label>
+
+                        <input asp-for="CompanyName"
+                               class="form-control"
+                               placeholder="Enter company name" />
+
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label asp-for="Industry" class="form-label fw-semibold"></label>
+
+                        <input asp-for="Industry"
+                               class="form-control"
+                               placeholder="Software, Banking, Healthcare..." />
+
+                        <span asp-validation-for="Industry" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label asp-for="Location" class="form-label fw-semibold"></label>
+
+                        <input asp-for="Location"
+                               class="form-control"
+                               placeholder="Lahore, Pakistan" />
+
+                        <span asp-validation-for="Location" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label asp-for="Phone" class="form-label fw-semibold"></label>
+
+                        <input asp-for="Phone"
+                               class="form-control"
+                               placeholder="+92 300 1234567" />
+
+                    </div>
+
+                    <div class="col-12 mb-4">
+
+                        <label asp-for="Website" class="form-label fw-semibold"></label>
+
+                        <input asp-for="Website"
+                               class="form-control"
+                               placeholder="https://www.company.com" />
+
+                    </div>
+
+                    <div class="col-12 mb-4">
+
+                        <label asp-for="Description" class="form-label fw-semibold"></label>
+
+                        <textarea asp-for="Description"
+                                  class="form-control"
+                                  rows="6"
+                                  placeholder="Describe your company, culture and mission..."></textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="text-end">
+
+                    <button type="submit"
+                            class="btn btn-primary px-4">
+                        <i class="bi bi-floppy"></i>
+                        Save Company Profile
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

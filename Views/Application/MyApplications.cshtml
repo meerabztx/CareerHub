@@ -1,0 +1,41 @@
+﻿@model IEnumerable<JobPortalSystem.Models.Application>
+
+<h2>My Applications</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Job</th>
+            <th>Status</th>
+            <th>Applied Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Job?.Title</td>
+
+            <td>
+                @if (item.Status == "Pending")
+                {
+                    <span class="badge bg-warning text-dark">Pending</span>
+                }
+                else if (item.Status == "Accepted")
+                {
+                    <span class="badge bg-success">Accepted</span>
+                }
+                else if (item.Status == "Rejected")
+                {
+                    <span class="badge bg-danger">Rejected</span>
+                }
+            </td>
+
+            <td>
+                @item.AppliedDate.ToString("dd/MM/yyyy")
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
